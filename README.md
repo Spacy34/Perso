@@ -48,6 +48,37 @@ npm run lint    # vérification lint
 - **Notes**: création/suppression de notes persistées.
 - **Reviews**: métriques calculées depuis les données locales Tasks/Finances.
 
+
+## Résoudre le message "This branch has conflicts that must be resolved"
+
+Si GitHub refuse le push/merge à cause de conflits:
+
+1. Récupère la branche de base (souvent `main`)
+```bash
+git fetch origin
+```
+
+2. Rebase ta branche dessus
+```bash
+git rebase origin/main
+```
+
+3. Résous chaque conflit (fichiers marqués `<<<<<<<`, `=======`, `>>>>>>>`), puis:
+```bash
+git add <fichier_resolu>
+git rebase --continue
+```
+
+4. Une fois le rebase terminé:
+```bash
+git push --force-with-lease
+```
+
+Tu peux aussi utiliser le script helper inclus:
+```bash
+./scripts/rebase-main.sh
+```
+
 ## Structure principale
 - `app/` : routes/pages Next.js
 - `components/` : composants UI partagés
